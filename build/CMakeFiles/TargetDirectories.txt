@@ -1,3 +1,0 @@
-/home/weicailin/vision_hw/build/CMakeFiles/vision_hw.dir
-/home/weicailin/vision_hw/build/CMakeFiles/edit_cache.dir
-/home/weicailin/vision_hw/build/CMakeFiles/rebuild_cache.dir
