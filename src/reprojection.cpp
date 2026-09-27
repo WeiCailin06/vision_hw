@@ -9,7 +9,7 @@ Point2D projectPoint(const Point3D& pw, const CameraIntrinsics& K, const CameraE
 
     // 2. 异常处理：如果点在相机后方，抛出异常
     if (Zc <= 0.0) {
-        throw std::runtime_error("Error: 深度 Zc <= 0，该点位于相机后方，无法投影！");
+        throw std::runtime_error("Error: 深度 Zc <= 0,该点位于相机后方,无法投影!");
     }
 
     // 3. 归一化：透视除法

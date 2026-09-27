@@ -1,30 +1,18 @@
-#pragma once // 防止头文件重复包含
+#pragma once
 #include <cmath>
 #include <stdexcept>
-
-// 1. 定义三维点
-struct Point3D {
-    double x, y, z;
-};
-
-// 2. 定义二维像素点
-struct Point2D {
+struct Point2D {//定义二维点
     double u, v;
 };
-
-// 3. 定义相机内参
-struct CameraIntrinsics {
+struct Point3D {//定义三维点
+    double x, y, z;
+};
+struct CameraIntrinsics {//设置相机内参
     double fx, fy, cx, cy;
 };
-
-// 4. 定义相机外参
-struct CameraExtrinsics {
-    double R[3][3]; // 旋转矩阵
-    double t[3];    // 平移向量
+struct CameraExtrinsics {//设置相机外参
+    double R[3][3];
+    double t[3];
 };
-
-// 5. 声明重投影函数
-Point2D projectPoint(const Point3D& pw, const CameraIntrinsics& K, const CameraExtrinsics& ext);
-
-// 6. 声明计算误差函数
-double calculatePixelError(const Point2D& projected, const Point2D& observed);
+Point2D projectPoint(const Point3D& pw,const CameraIntrinsics& K,const CameraExtrinsics& ext);//重投影函数
+double calculatePixelError(const Point2D& projected,const Point2D& observed);//计算误差函数

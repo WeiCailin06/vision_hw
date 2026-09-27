@@ -1,0 +1,31 @@
+# 27赛季算法组视觉侧第一次培训作业
+
+## 1. 开发环境、坐标系约定和重投影原理
+*   开发环境：Windows 11 + WSL2 (Ubuntu) + VS Code + CMake + GCC。
+*   坐标系约定：世界到相机的变换为 `Pc = R * Pw + t`，三维坐标与平移量使用相同长度单位（米）。
+*   重投影原理：采用理想针孔模型，忽略畸变。
+    1. 外参变换：`Pc = R * Pw + t`
+    2. 透视除法：`x = Xc / Zc`，`y = Yc / Zc`（处理非正深度 `Zc <= 0` 的异常）
+    3. 内参变换：`u = fx * x + cx`，`v = fy * y + cy`
+    4. 像素欧氏距离：`sqrt((u - u_obs)^2 + (v - v_obs)^2)`
+
+## 2. 项目结构、构建运行方法、测试结果及误差分析
+*   项目结构：`include/` 放头文件，`src/` 放实现文件和main，根目录放 `CMakeLists.txt`。
+*   构建运行方法：`mkdir build && cd build` -> `cmake ..` -> `make` -> `./vision_hw`
+*   测试结果：投影坐标：(480, 560)，理论预期：(480, 560)，重投影误差：1.41421 像素。异常处理：成功捕获 `Zc <= 0` 的错误。
+*   误差分析：手动给观测值加了1像素噪声，验证了误差计算函数的正确性。
+
+## 3. 遇到的问题与解决办法
+   问题1：在 Windows 下装 MinGW 导致环境混乱。
+    解决：明确作业要求 Linux，全面转向 WSL2 Ubuntu 环境。
+   问题2：CMake 报错找不到 `src/main.cpp`。
+    解决：重新检查了文件夹结构，正确创建文件。
+   问题3：C++ 结构体报错缺少分号。
+    解决：补齐分号，并引入 `<cmath>`。
+   问题4：
+*   AI使用心得：通过向 AI 描述具体的报错（比如“找不到文件”、“结构体缺少分号”），让 AI 解释错误原因，并指导我修改，而不是直接让 AI 替我写代码。
+
+## 4. 仓库链接
+*   代码仓库：https://github.com/WeiCailin06/vision_hw
+*   PR 链接：https://github.com/WeiCailin06/vision_hw/pull/1
+*   Commit Hash：[8b4c91bcddaf129c3fd5e475cc274911c9737376 (origin/feature/reprojection)]
